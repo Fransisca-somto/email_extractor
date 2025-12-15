@@ -4,12 +4,12 @@ from bs4 import BeautifulSoup
 import concurrent.futures
 import time
 
-scoutURL = "https://universalstorebuy.myshopify.com/policies/privacy-policy"
+# scoutURL = "https://universalstorebuy.myshopify.com/policies/privacy-policy"
 RemainingURLs = []
 
 def find_emails_in_text(scoutURL):
     # try:        
-    secondPage = requests.get(scoutURL, timeout=2)
+    secondPage = requests.get(scoutURL, timeout=5)
 
     # htmlcontent = secondPage.text
 
@@ -18,8 +18,6 @@ def find_emails_in_text(scoutURL):
     # secondResults = secSoup.find(id="MainContent")
 
     secondPython_jobs = secSoup.get_text()
-    # print(type(secondPython_jobs))
-    # print(secondPython_jobs)
 
     email_pattern = r"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}"
     emails = [] 
@@ -41,7 +39,7 @@ def getemails(data):
                 emails_found.extend(emails)
             except Exception as e:
                 # print(f"Error occurred: {e}")
-                RemainingURLs.append(scoutURL)
+                RemainingURLs.append('Error processing URL')
                 
     print("Finished processing all URLs.")  
     print("Remaining URLs:")        
